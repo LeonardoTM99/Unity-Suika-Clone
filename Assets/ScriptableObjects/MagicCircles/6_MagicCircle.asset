@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11f8064569fab0843a05e2fa1246b6ba, type: 3}
   m_Name: 6_MagicCircle
   m_EditorClassIdentifier: 
-  _Sprite: {fileID: 0}
-  _Size: {x: 0.79, y: 0.79, z: 0.79}
-  _Type: 6
-  _PointsEarned: 15
-  _nextCircle: {fileID: 11400000, guid: df21d205aa9dab940834a57672fbce48, type: 2}
+  sprite: {fileID: 21300000, guid: 2c505489a951d70458a60b7e1c0a8217, type: 3}
+  size: {x: 1.2, y: 1.2, z: 1.2}
+  type: 6
+  pointsEarned: 16
+  nextCircle: {fileID: 11400000, guid: df21d205aa9dab940834a57672fbce48, type: 2}

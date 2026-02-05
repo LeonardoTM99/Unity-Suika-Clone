@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11f8064569fab0843a05e2fa1246b6ba, type: 3}
+  m_Name: 3_MagicCircle
+  m_EditorClassIdentifier: 
+  _Sprite: {fileID: 0}
+  _Size: {x: 0.39, y: 0.39, z: 0.39}
+  _Type: 3
+  _PointsEarned: 6
+  _nextCircle: {fileID: 11400000, guid: 4ee1203fb7de6fe47b5a10db453d1f9f, type: 2}

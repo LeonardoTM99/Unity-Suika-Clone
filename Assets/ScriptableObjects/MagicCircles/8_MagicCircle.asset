@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 8_MagicCircle
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: b8eea5d603cb76843a83d14877c832d3, type: 3}
-  size: {x: 1.8, y: 1.8, z: 1.8}
+  size: {x: 1.55, y: 1.55, z: 1.55}
   type: 8
   pointsEarned: 23
   nextCircle: {fileID: 11400000, guid: 713de5153bad7df4a8900a82584a4ce0, type: 2}

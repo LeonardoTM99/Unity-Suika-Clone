@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class MagicCircleBehavior : MonoBehaviour
 {
-    public MagicCircle _actualMagicCircle; //reference to Magic circle Scriptable Object
+    [Header ("References")]
+    public MagicCircle actualMagicCircle; //reference to Magic circle Scriptable Object
 
     //Local Variables
     private SpriteRenderer _sprite;
@@ -20,16 +21,16 @@ public class MagicCircleBehavior : MonoBehaviour
         //--- Get Data from Scriptable Object & assign them to variables of this script ---
 
         _sprite = GetComponent<SpriteRenderer>();
-        _sprite.sprite = _actualMagicCircle.sprite;
+        _sprite.sprite = actualMagicCircle.sprite;
 
-        _size = _actualMagicCircle.size;
+        _size = actualMagicCircle.size;
         transform.localScale = _size;
 
-        _type = _actualMagicCircle.type;
+        _type = actualMagicCircle.type;
 
-        _points = _actualMagicCircle.pointsEarned;
+        _points = actualMagicCircle.pointsEarned;
 
-        _nextMagicCircleData = _actualMagicCircle.nextCircle;
+        _nextMagicCircleData = actualMagicCircle.nextCircle;
 
     }
 
@@ -46,9 +47,9 @@ public class MagicCircleBehavior : MonoBehaviour
             Vector2 contactPoint = contact.point;
 
             //--- Merge logic ---
-            if (collisionCircleScript._type == _type) //Check hasMerged flag to prevent this merge logic from happening twice (this object and the collision object)
+            if (collisionCircleScript._type == _type && _nextMagicCircleData != null) //If collides with same type magic circle and there is a next evolution
             {
-                if (!hasMerged && !collisionCircleScript.hasMerged)
+                if (!hasMerged && !collisionCircleScript.hasMerged) //Check hasMerged flag to prevent this merge logic from happening twice (this object and the collision object)
                 {
 
                     //SPAWN next circle at collision point

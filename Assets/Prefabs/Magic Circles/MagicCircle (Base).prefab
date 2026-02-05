@@ -165,4 +165,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb83bb59472c31e4bbd1a80eac2d4dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _actualMagicCircle: {fileID: 0}
+  actualMagicCircle: {fileID: 11400000, guid: 971ad54444956194d97bf63842623c19, type: 2}

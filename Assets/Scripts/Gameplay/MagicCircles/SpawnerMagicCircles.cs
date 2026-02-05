@@ -23,15 +23,14 @@ public class SpawnerMagicCircles : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        GameStateManager.Instance.OnGameStateChanged += HandleGameStateChanged;
-    }
-
     #region Spawn Methods
-    public void SpawnAtStartLine(GameObject magicCircle)
+    public GameObject SpawnAtStartLine()
     {
-        Instantiate(magicCircle, startLinePosition.position, Quaternion.identity);
+        GameObject newMagicCircle;
+
+        newMagicCircle = Instantiate(magicCirclePrefab, startLinePosition.position, Quaternion.identity);
+
+        return newMagicCircle;
     }
 
     //--- Spawning new magic circle when MERGE happens ---
@@ -46,15 +45,4 @@ public class SpawnerMagicCircles : MonoBehaviour
 
     #endregion
 
-    #region Game State Logic
-
-    private void HandleGameStateChanged(GameStateManager.GameState state)
-    {
-        if (state == GameStateManager.GameState.Preparing)
-        {
-            SpawnAtStartLine(magicCirclePrefab);
-        }
-    }
-
-    #endregion
 }

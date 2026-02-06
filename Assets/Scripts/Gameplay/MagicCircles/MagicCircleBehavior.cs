@@ -3,42 +3,50 @@ using UnityEngine;
 
 public class MagicCircleBehavior : MonoBehaviour
 {
-    [Header ("References")]
-    public MagicCircle actualMagicCircle; //reference to Magic circle Scriptable Object
 
     //Local Variables
     private SpriteRenderer _sprite;
     private Vector3 _size;
-    private string _type;
     private int _points;
     private MagicCircle _nextMagicCircleData;
+    private MagicCircle currentMagicCircleData;
 
     private bool hasMerged; //Flag to prevent merge logic from happening twice
 
+    
 
-    void Start()
+    private void Awake()
     {
-        //--- Get Data from Scriptable Object & assign them to variables of this script ---
-
         _sprite = GetComponent<SpriteRenderer>();
-        _sprite.sprite = actualMagicCircle.sprite;
-
-        _size = actualMagicCircle.size;
-        transform.localScale = _size;
-
-        _type = actualMagicCircle.type;
-
-        _points = actualMagicCircle.pointsEarned;
-
-        _nextMagicCircleData = actualMagicCircle.nextCircle;
-
     }
 
+    #region Helper Methods
+    public void AssignDataToNewCircle(MagicCircle mcData)
+    {
+        currentMagicCircleData = mcData;
+
+        //--- Get Data from Scriptable Object & assign them to variables of this script ---
+
+        _sprite.sprite = mcData.sprite;
+
+        _size = mcData.size;
+        transform.localScale = _size;
+
+        _points = mcData.pointsEarned;
+
+        _nextMagicCircleData = mcData.nextCircle;
+    }
+
+    #endregion
+
+    #region Collision Logic
 
     // --- Collision Merge Logic ---
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collision.gameObject.CompareTag("Box"))
+        GameStateManager.Instance.SetState(GameStateManager.GameState.Aiming);
+
+        if (collision.gameObject.CompareTag("MagicCircle"))
         {
             MagicCircleBehavior collisionCircleScript = collision.gameObject.GetComponent<MagicCircleBehavior>(); //Get the MagicCircleB script from collision game object
 
@@ -47,7 +55,7 @@ public class MagicCircleBehavior : MonoBehaviour
             Vector2 contactPoint = contact.point;
 
             //--- Merge logic ---
-            if (collisionCircleScript._type == _type && _nextMagicCircleData != null) //If collides with same type magic circle and there is a next evolution
+            if (collisionCircleScript.currentMagicCircleData == currentMagicCircleData && _nextMagicCircleData != null) //If collides with same type magic circle and there is a next evolution
             {
                 if (!hasMerged && !collisionCircleScript.hasMerged) //Check hasMerged flag to prevent this merge logic from happening twice (this object and the collision object)
                 {
@@ -65,4 +73,6 @@ public class MagicCircleBehavior : MonoBehaviour
             }
         }
     }
+
+    #endregion
 }

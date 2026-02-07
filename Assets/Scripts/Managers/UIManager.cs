@@ -47,12 +47,15 @@ public class UIManager : MonoBehaviour
 
     public void StartGame()
     {
+        SpawnerMagicCircles.Instance.InitializeUpcomingCircles();
+
         startMenuUIPanel.SetActive(false);
         gameplayUIPanel.SetActive(true);
 
         GameStateManager.Instance.SetState(GameStateManager.GameState.Aiming);
 
         RefreshUpcomingCirclesUI();
+
     }
 
     #region Difficulty

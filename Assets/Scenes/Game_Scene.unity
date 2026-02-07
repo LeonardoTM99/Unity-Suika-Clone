@@ -2846,6 +2846,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
+  timeBetweenRounds: 0.7
 --- !u!4 &1981972976
 Transform:
   m_ObjectHideFlags: 0

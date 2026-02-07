@@ -25,15 +25,10 @@ public class SpawnerMagicCircles : MonoBehaviour
             Destroy(gameObject);
     }
 
-    private void Start()
-    {
-        InitializeUpcomingCircles();
-    }
-
 
     #region Upcoming Circles Logic
 
-    private void InitializeUpcomingCircles()
+    public void InitializeUpcomingCircles()
     {
         upcomingCircles.Clear();
 

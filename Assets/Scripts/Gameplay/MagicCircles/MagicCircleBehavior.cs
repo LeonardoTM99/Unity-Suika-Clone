@@ -44,7 +44,6 @@ public class MagicCircleBehavior : MonoBehaviour
     // --- Collision Merge Logic ---
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        GameStateManager.Instance.SetState(GameStateManager.GameState.Aiming);
 
         if (collision.gameObject.CompareTag("MagicCircle"))
         {

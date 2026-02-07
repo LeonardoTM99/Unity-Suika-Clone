@@ -6,7 +6,10 @@ public class GameplayController : MonoBehaviour
     private Rigidbody2D currentRb;
 
     [SerializeField] private float moveSpeed = 2f;
+    [SerializeField] private float timeBetweenRounds = 1.5f;
 
+    private float dropTimer;
+    private bool isWaitingForNextRound;
     private bool canPlay;
 
 
@@ -18,21 +21,37 @@ public class GameplayController : MonoBehaviour
 
     private void Update()
     {
-        if (!canPlay || currentMagicCircle == null)
-            return;
-
-        float moveDir = InputManager.Instance.GetMoveInput();
-
-        if (Mathf.Abs(moveDir) > 0.01f)
+        if (canPlay && currentMagicCircle != null)
         {
-            currentMagicCircle.transform.position += Vector3.right * moveDir * moveSpeed * Time.deltaTime;
+            float moveDir = InputManager.Instance.GetMoveInput();
+
+            if (Mathf.Abs(moveDir) > 0.01f)
+            {
+                currentMagicCircle.transform.position +=
+                    Vector3.right * moveDir * moveSpeed * Time.deltaTime;
+            }
+
+            if (InputManager.Instance.GetDropInput())
+            {
+                DropCurrentCircle();
+            }
         }
 
-        if (InputManager.Instance.GetDropInput())
+        if (isWaitingForNextRound)
         {
-            DropCurrentCircle();
+            dropTimer += Time.deltaTime;
+
+            if (dropTimer >= timeBetweenRounds)
+            {
+                isWaitingForNextRound = false;
+                currentMagicCircle = null;
+                currentRb = null;
+
+                GameStateManager.Instance.SetState(GameStateManager.GameState.Aiming);
+            }
         }
     }
+
 
     #region Helper Methods
 
@@ -50,10 +69,11 @@ public class GameplayController : MonoBehaviour
     {
         canPlay = false;
 
+        dropTimer = 0f;
+        isWaitingForNextRound = true;
+
         currentRb.bodyType = RigidbodyType2D.Dynamic;
         currentRb.gravityScale = 1f;
-        currentMagicCircle = null;
-        currentRb = null;
 
         InputManager.Instance.DisableGameplayInput();
         GameStateManager.Instance.SetState(GameStateManager.GameState.Dropped);

@@ -59,11 +59,14 @@ public class MagicCircleBehavior : MonoBehaviour
                 if (!hasMerged && !collisionCircleScript.hasMerged) //Check hasMerged flag to prevent this merge logic from happening twice (this object and the collision object)
                 {
 
+                    hasMerged = true;
+                    collisionCircleScript.hasMerged = true;
+
                     //SPAWN next circle at collision point
                     SpawnerMagicCircles.Instance.SpawnAtMerged(contactPoint, _nextMagicCircleData);
 
-                    hasMerged = true;
-                    collisionCircleScript.hasMerged = true;
+                    //Add Points to score
+                    ScoreManager.Instance.AddPoints(_points);
 
                     //Destroy original circle
                     Destroy(gameObject);

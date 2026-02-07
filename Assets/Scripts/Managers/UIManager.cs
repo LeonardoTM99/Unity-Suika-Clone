@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image firstUpcomingCircle;
     [SerializeField] private Image secondUpcomingCircle;
     [SerializeField] private Image thirdUpcomingCircle;
+    [SerializeField] private TextMeshProUGUI score;
 
     [Header("Difficulty Settings")]
     [SerializeField] private DifficultySettings easyDifficultySO;
@@ -37,6 +39,11 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         GameStateManager.Instance.OnGameStateChanged += HandleGameStateChanged;
+        if (ScoreManager.Instance != null)
+        {
+            ScoreManager.Instance.OnScoreChanged += RefreshScoreUI;
+            RefreshScoreUI(0); // initialize UI
+        }
 
         startMenuUIPanel.SetActive(true);
         gameplayUIPanel.SetActive(false);
@@ -82,6 +89,11 @@ public class UIManager : MonoBehaviour
     public void RefreshUpcomingCirclesUI()
     {
         SpawnerMagicCircles.Instance.DisplayUpcomingCirclesInUI(firstUpcomingCircle, secondUpcomingCircle, thirdUpcomingCircle);
+    }
+
+    private void RefreshScoreUI(int scoreText)
+    {
+        score.text = scoreText.ToString();
     }
 
     #endregion

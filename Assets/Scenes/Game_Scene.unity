@@ -576,6 +576,7 @@ MonoBehaviour:
   firstUpcomingCircle: {fileID: 1306158885}
   secondUpcomingCircle: {fileID: 755145068}
   thirdUpcomingCircle: {fileID: 147223950}
+  score: {fileID: 37241211}
   easyDifficultySO: {fileID: 11400000, guid: a24e5cb77d43a40488f5a566d68e86f4, type: 2}
   normalDifficultySO: {fileID: 11400000, guid: 0ecc870f7f835064c915b24df1d08a66, type: 2}
   hardDifficultySO: {fileID: 11400000, guid: 5ffb44acaf1502e409f20b691e7114c6, type: 2}
@@ -1621,6 +1622,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 849439131}
   m_CullTransparentMesh: 1
+--- !u!1 &938434226
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 938434228}
+  - component: {fileID: 938434227}
+  m_Layer: 0
+  m_Name: ScoreManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &938434227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 938434226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91435e209343c4f4a9dfb98c3c98e9cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &938434228
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 938434226}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.4105305, y: -1.3218169, z: 544.6367}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963197389
 GameObject:
   m_ObjectHideFlags: 0
@@ -3083,6 +3128,7 @@ SceneRoots:
   - {fileID: 1928564948}
   - {fileID: 1274964885}
   - {fileID: 1981972976}
+  - {fileID: 938434228}
   - {fileID: 1075554843}
   - {fileID: 396248582}
   - {fileID: 720998420}

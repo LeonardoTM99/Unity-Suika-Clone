@@ -21,7 +21,6 @@ public class InputManager : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
 
         _playerControlsScript = new PlayerControls();

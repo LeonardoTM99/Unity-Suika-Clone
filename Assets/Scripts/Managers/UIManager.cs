@@ -1,4 +1,5 @@
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ public class UIManager : MonoBehaviour
     [Header("Panels")]
     [SerializeField] private GameObject startMenuUIPanel;
     [SerializeField] private GameObject gameplayUIPanel;
+    [SerializeField] private GameObject gameOverUIPanel;
 
     [Header("Gameplay Panel UI Elements")]
     [SerializeField] private Image firstUpcomingCircle;
@@ -102,11 +104,12 @@ public class UIManager : MonoBehaviour
 
     private void HandleGameStateChanged(GameStateManager.GameState state)
     {
-        bool isMenu = state == GameStateManager.GameState.Menu;
-
-        startMenuUIPanel.SetActive(isMenu);
-        gameplayUIPanel.SetActive(!isMenu);
+        startMenuUIPanel.SetActive(state == GameStateManager.GameState.Menu);
+        gameplayUIPanel.SetActive(state == GameStateManager.GameState.Aiming ||
+                                  state == GameStateManager.GameState.Dropped);
+        gameOverUIPanel.SetActive(state == GameStateManager.GameState.GameOver);
     }
+
 
     #endregion
 }

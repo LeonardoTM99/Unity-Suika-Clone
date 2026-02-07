@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - MagicCircle
+  - LoseArea
   layers:
   - Default
   - TransparentFX

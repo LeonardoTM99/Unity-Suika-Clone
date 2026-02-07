@@ -22,6 +22,11 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        GameStateManager.Instance.OnGameStateChanged += HandleGameStateChanged;
+    }
+
 
     public void AddPoints(int points)
     {
@@ -35,4 +40,15 @@ public class ScoreManager : MonoBehaviour
         OnScoreChanged?.Invoke(currentScore);
     }
 
+    #region Game States Logic
+
+    private void HandleGameStateChanged(GameStateManager.GameState state)
+    {
+        if (state == GameStateManager.GameState.GameOver)
+        {
+            ResetScore();
+        }
+    }
+
+    #endregion
 }

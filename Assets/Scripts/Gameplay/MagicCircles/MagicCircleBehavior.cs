@@ -76,5 +76,14 @@ public class MagicCircleBehavior : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //If any magic circle gets out of the box and therefore touches the lose trigger collider, it's game over.
+        if (collision.gameObject.CompareTag("LoseArea"))
+        {
+            GameStateManager.Instance.SetState(GameStateManager.GameState.GameOver);
+        }
+    }
+
     #endregion
 }

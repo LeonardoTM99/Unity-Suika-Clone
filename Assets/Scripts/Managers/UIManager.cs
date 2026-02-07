@@ -5,7 +5,8 @@ public class UIManager : MonoBehaviour
 {
 
     [Header("Panels")]
-    [SerializeField] private GameObject startMenuPanel;
+    [SerializeField] private GameObject startMenuUIPanel;
+    [SerializeField] private GameObject gameplayUIPanel;
 
     [Header("Other References")]
     [SerializeField] private DifficultySettings easyDifficultySO;
@@ -16,12 +17,16 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        startMenuPanel.SetActive(true);
+        GameStateManager.Instance.OnGameStateChanged += HandleGameStateChanged;
+
+        startMenuUIPanel.SetActive(true);
+
+        SpawnerMagicCircles.Instance.selectedSettings = normalDifficultySO;
     }
 
     public void StartGame()
     {
-        startMenuPanel.SetActive(false);
+        startMenuUIPanel.SetActive(false);
         GameStateManager.Instance.SetState(GameStateManager.GameState.Aiming);
     }
 
@@ -37,5 +42,23 @@ public class UIManager : MonoBehaviour
     {
         SpawnerMagicCircles.Instance.selectedSettings = hardDifficultySO;
     }
+
+    #region Game State Logic
+
+    private void HandleGameStateChanged(GameStateManager.GameState state)
+    {
+        if (state != GameStateManager.GameState.Menu)
+        {
+            startMenuUIPanel.SetActive(false);
+            gameplayUIPanel.SetActive(true);
+        }
+        else
+        {
+            gameplayUIPanel.SetActive(false);
+            startMenuUIPanel.SetActive(true);
+        }
+    }
+
+    #endregion
 
 }

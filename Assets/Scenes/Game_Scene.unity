@@ -573,9 +573,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startMenuUIPanel: {fileID: 1767062463}
   gameplayUIPanel: {fileID: 1746993978}
-  firstUpcomingCircle: {fileID: 0}
-  secondUpcomingCircle: {fileID: 0}
-  thirdUpcomingCircle: {fileID: 0}
+  firstUpcomingCircle: {fileID: 1306158885}
+  secondUpcomingCircle: {fileID: 755145068}
+  thirdUpcomingCircle: {fileID: 147223950}
   easyDifficultySO: {fileID: 11400000, guid: a24e5cb77d43a40488f5a566d68e86f4, type: 2}
   normalDifficultySO: {fileID: 11400000, guid: 0ecc870f7f835064c915b24df1d08a66, type: 2}
   hardDifficultySO: {fileID: 11400000, guid: 5ffb44acaf1502e409f20b691e7114c6, type: 2}
@@ -629,7 +629,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.69611466, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1373,7 +1373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8490566, g: 0.50462794, b: 0.83955306, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1996,10 +1996,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eefa6923f9be80b4d836d6d9358b9109, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedSettings: {fileID: 0}
   magicCirclePrefab: {fileID: 4664941002261509697, guid: f385808380116f34184dbe71c9626029, type: 3}
   startLinePosition: {fileID: 184527645}
-  upcomingCircles: []
+  selectedSettings: {fileID: 0}
 --- !u!4 &1274964885
 Transform:
   m_ObjectHideFlags: 0
@@ -2201,7 +2200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.36804628, g: 0.82641506, b: 0.3165325, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2723,7 +2722,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1746993979
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2761,7 +2760,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1767062464
 RectTransform:
   m_ObjectHideFlags: 0

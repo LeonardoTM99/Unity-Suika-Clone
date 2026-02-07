@@ -1,53 +1,96 @@
-using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpawnerMagicCircles : MonoBehaviour
 {
-    public static SpawnerMagicCircles Instance { get; private set; }
+    public static SpawnerMagicCircles Instance;
 
+    [Header("References")]
+    [SerializeField] private GameObject magicCirclePrefab;
+    [SerializeField] private Transform startLinePosition;
+
+    [Header("Settings")]
     public DifficultySettings selectedSettings;
 
-    [SerializeField] private GameObject magicCirclePrefab; //"Empty" prefab, to be assigned data later
-    [SerializeField] private Transform startLinePosition;
+    private List<MagicCircle> upcomingCircles = new List<MagicCircle>();
 
 
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
+        if (Instance == null)
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+        else
+            Destroy(gameObject);
+    }
+
+    private void Start()
+    {
+        InitializeUpcomingCircles();
+    }
+
+
+    #region Upcoming Circles Logic
+
+    private void InitializeUpcomingCircles()
+    {
+        upcomingCircles.Clear();
+
+        for (int i = 0; i < 3; i++)
+        {
+            RefillUpcomingCirclesList();
         }
     }
 
-    #region Spawn Methods
-    public GameObject SpawnAtStartLine()
+    private void RefillUpcomingCirclesList()
     {
         int randomIndex = Random.Range(0, selectedSettings.magicCircleData.Length);
-        GameObject newMagicCircle;
-
-        newMagicCircle = Instantiate(magicCirclePrefab, startLinePosition.position, Quaternion.identity);
-
-        newMagicCircle.GetComponent<MagicCircleBehavior>().AssignDataToNewCircle(selectedSettings.magicCircleData[randomIndex]);
-
-        return newMagicCircle;
-    }
-
-    //--- Spawning new magic circle when MERGE happens ---
-    public void SpawnAtMerged(Vector2 spawnPoint, MagicCircle newMCData)
-    {
-        GameObject newMagicCircle;
-
-        newMagicCircle = Instantiate(magicCirclePrefab, spawnPoint, Quaternion.identity); //Spawn the "empty" magic circle prefab at collision point
-
-        newMagicCircle.GetComponent<MagicCircleBehavior>().AssignDataToNewCircle(newMCData); //Set the actual data to the "empty" prefab, turning it into the actual next magic circle.
+        upcomingCircles.Add(selectedSettings.magicCircleData[randomIndex]);
     }
 
     #endregion
 
+    #region Spawn Methods
+
+    public GameObject SpawnAtStartLine()
+    {
+        GameObject newMagicCircle = Instantiate(magicCirclePrefab, startLinePosition.position, Quaternion.identity);
+
+        // Assign FIRST upcoming circle
+        newMagicCircle.GetComponent<MagicCircleBehavior>().AssignDataToNewCircle(upcomingCircles[0]);
+
+        // Consume it
+        upcomingCircles.RemoveAt(0);
+
+        // Refill only ONE at the back
+        RefillUpcomingCirclesList();
+
+        //UI refresh happens AFTER spawn
+        UIManager.Instance.RefreshUpcomingCirclesUI();
+
+        return newMagicCircle;
+    }
+
+    public void SpawnAtMerged(Vector2 spawnPoint, MagicCircle newMCData)
+    {
+        GameObject newMagicCircle;
+
+        newMagicCircle = Instantiate(magicCirclePrefab, spawnPoint, Quaternion.identity);
+
+        newMagicCircle.GetComponent<MagicCircleBehavior>().AssignDataToNewCircle(newMCData);
+    }
+
+    #endregion
+
+    #region UI
+
+    public void DisplayUpcomingCirclesInUI(Image first, Image second, Image third)
+    {
+        first.sprite = upcomingCircles[0].sprite;
+        second.sprite = upcomingCircles[1].sprite;
+        third.sprite = upcomingCircles[2].sprite;
+    }
+
+    #endregion
 }

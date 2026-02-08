@@ -5,5 +5,6 @@ public class DifficultySettings : ScriptableObject
 {
     public MagicCircle[] magicCircleData; //reference to Magic circle Scriptable Object
 
+    public GameObject map;
 
 }

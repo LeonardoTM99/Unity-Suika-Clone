@@ -11,7 +11,6 @@ public class GameStateManager : MonoBehaviour
         Preparing,
         Aiming,
         Dropped,
-        Resolving,
         GameOver
     }
 

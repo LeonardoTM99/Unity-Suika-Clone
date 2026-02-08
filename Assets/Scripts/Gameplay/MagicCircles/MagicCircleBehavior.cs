@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class MagicCircleBehavior : MonoBehaviour
 {
+    [Header("Game Over Logic")]
+    [SerializeField] private float gameOverGraceTime = 0.75f;
 
     //Local Variables
     private SpriteRenderer _sprite;
@@ -12,13 +14,33 @@ public class MagicCircleBehavior : MonoBehaviour
     private MagicCircle currentMagicCircleData;
 
     private bool hasMerged; //Flag to prevent merge logic from happening twice
+    private bool hasDropped = false;
+    private bool canTriggerGameOver = false;
+    private float dropTime;
 
-    
+
 
     private void Awake()
     {
         _sprite = GetComponent<SpriteRenderer>();
     }
+
+    private void Start()
+    {
+        GameStateManager.Instance.OnGameStateChanged += HandleGameStateChanged;
+    }
+
+    private void Update()
+    {
+        if (hasDropped && !canTriggerGameOver)
+        {
+            if (Time.time - dropTime >= gameOverGraceTime)
+            {
+                canTriggerGameOver = true;
+            }
+        }
+    }
+
 
     #region Helper Methods
     public void AssignDataToNewCircle(MagicCircle mcData)
@@ -44,31 +66,29 @@ public class MagicCircleBehavior : MonoBehaviour
     // --- Collision Merge Logic ---
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (!hasDropped)
+        {
+            hasDropped = true;
+            dropTime = Time.time;
+        }
 
         if (collision.gameObject.CompareTag("MagicCircle"))
         {
-            MagicCircleBehavior collisionCircleScript = collision.gameObject.GetComponent<MagicCircleBehavior>(); //Get the MagicCircleB script from collision game object
+            MagicCircleBehavior collisionCircleScript = collision.gameObject.GetComponent<MagicCircleBehavior>();
 
-            //Get the first point where collision happened
             ContactPoint2D contact = collision.contacts[0];
             Vector2 contactPoint = contact.point;
 
-            //--- Merge logic ---
-            if (collisionCircleScript.currentMagicCircleData == currentMagicCircleData && _nextMagicCircleData != null) //If collides with same type magic circle and there is a next evolution
+            if (collisionCircleScript.currentMagicCircleData == currentMagicCircleData && _nextMagicCircleData != null)
             {
-                if (!hasMerged && !collisionCircleScript.hasMerged) //Check hasMerged flag to prevent this merge logic from happening twice (this object and the collision object)
+                if (!hasMerged && !collisionCircleScript.hasMerged)
                 {
-
                     hasMerged = true;
                     collisionCircleScript.hasMerged = true;
 
-                    //SPAWN next circle at collision point
                     SpawnerMagicCircles.Instance.SpawnAtMerged(contactPoint, _nextMagicCircleData);
-
-                    //Add Points to score
                     ScoreManager.Instance.AddPoints(_points);
 
-                    //Destroy original circle
                     Destroy(gameObject);
                     Destroy(collisionCircleScript.gameObject);
                 }
@@ -76,14 +96,32 @@ public class MagicCircleBehavior : MonoBehaviour
         }
     }
 
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //If any magic circle gets out of the box and therefore touches the lose trigger collider, it's game over.
-        if (collision.gameObject.CompareTag("LoseArea"))
+        if (collision.CompareTag("LoseArea") && canTriggerGameOver)
         {
             GameStateManager.Instance.SetState(GameStateManager.GameState.GameOver);
         }
     }
 
+
     #endregion
+
+    #region Game State Logic
+    private void HandleGameStateChanged(GameStateManager.GameState state)
+    {
+        if (state == GameStateManager.GameState.Menu)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnDisable()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= HandleGameStateChanged;
+    }
+
+    #endregion
+
 }

@@ -36,8 +36,6 @@ public class GameplayController : MonoBehaviour
 
         if (canPlay && currentMagicCircle != null)
         {
-            //Visual Drop Line Logic
-            AppearDropLine();
 
             //Moving magic circle logic
             float moveDir = InputManager.Instance.GetMoveInput();
@@ -52,6 +50,12 @@ public class GameplayController : MonoBehaviour
                 currentMagicCircle.transform.position = pos;
 
             }
+
+            if (dropLine.gameObject.activeSelf)
+            {
+                dropLine.position = new Vector3(currentMagicCircle.transform.position.x, dropLine.position.y, dropLine.position.z);
+            }
+
 
             //Dropping magic circle logic
             if (InputManager.Instance.GetDropInput())
@@ -111,9 +115,6 @@ public class GameplayController : MonoBehaviour
             dropLine.gameObject.SetActive(true);
         }
 
-        //Move the drop line along with the current circle
-        dropLine.position = new Vector3(currentMagicCircle.transform.position.x, dropLine.position.y, dropLine.position.z);
-
     }
 
     private void DisappearDropLine()
@@ -137,11 +138,20 @@ public class GameplayController : MonoBehaviour
     {
         if (state == GameStateManager.GameState.Aiming)
         {
+            AppearDropLine();
             AskToSpawnNewCircle();
         }
         
         if (state == GameStateManager.GameState.Dropped)
         {
+            DisappearDropLine();
+        }
+
+        if (state == GameStateManager.GameState.GameOver)
+        {
+            InputManager.Instance.DisableGameplayInput();
+            SpawnerMagicCircles.Instance.DestroyAllCircles();
+            SpawnerMagicCircles.Instance.DeleteCurrentMap();
             DisappearDropLine();
         }
     }

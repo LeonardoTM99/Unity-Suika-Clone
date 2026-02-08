@@ -13,6 +13,8 @@ public class SpawnerMagicCircles : MonoBehaviour
     [Header("Settings")]
     public DifficultySettings selectedSettings;
 
+
+    private GameObject currentMap;
     private List<MagicCircle> upcomingCircles = new List<MagicCircle>();
 
 
@@ -79,6 +81,43 @@ public class SpawnerMagicCircles : MonoBehaviour
 
         newMagicCircle.GetComponent<MagicCircleBehavior>().AssignDataToNewCircle(newMCData);
     }
+
+    public void SpawnNewMap()
+    {
+        if (currentMap != null)
+        {
+            Destroy(currentMap);
+        }
+
+        currentMap = Instantiate(selectedSettings.map, Vector3.zero, Quaternion.identity);
+
+        startLinePosition.gameObject.SetActive(true);
+    }
+
+    public void DeleteCurrentMap()
+    {
+        if (currentMap != null)
+        {
+            Destroy(currentMap);
+        }
+
+        startLinePosition.gameObject.SetActive(false);
+    }
+
+    #endregion
+
+    #region CleanUp Logic
+
+    public void DestroyAllCircles()
+    {
+        MagicCircleBehavior[] circles = FindObjectsByType<MagicCircleBehavior>(FindObjectsSortMode.None);
+
+        foreach (MagicCircleBehavior circle in circles)
+        {
+            Destroy(circle.gameObject);
+        }
+    }
+
 
     #endregion
 

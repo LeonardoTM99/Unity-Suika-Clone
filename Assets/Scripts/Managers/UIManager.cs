@@ -56,6 +56,8 @@ public class UIManager : MonoBehaviour
 
     public void StartGame()
     {
+        SpawnerMagicCircles.Instance.SpawnNewMap();
+
         SpawnerMagicCircles.Instance.InitializeUpcomingCircles();
 
         startMenuUIPanel.SetActive(false);
@@ -98,16 +100,36 @@ public class UIManager : MonoBehaviour
         score.text = scoreText.ToString();
     }
 
+    public void GoToMainMenu()
+    {
+        GameStateManager.Instance.SetState(GameStateManager.GameState.Menu);
+
+        SpawnerMagicCircles.Instance.DeleteCurrentMap();
+    }
+
     #endregion
 
     #region Game State Logic
 
     private void HandleGameStateChanged(GameStateManager.GameState state)
     {
-        startMenuUIPanel.SetActive(state == GameStateManager.GameState.Menu);
-        gameplayUIPanel.SetActive(state == GameStateManager.GameState.Aiming ||
-                                  state == GameStateManager.GameState.Dropped);
-        gameOverUIPanel.SetActive(state == GameStateManager.GameState.GameOver);
+        if (state == GameStateManager.GameState.Menu)
+        {
+            startMenuUIPanel.SetActive(true);
+        }
+        else { startMenuUIPanel.SetActive(false); }
+
+        if (state == GameStateManager.GameState.Aiming || state == GameStateManager.GameState.Dropped)
+        {
+            gameplayUIPanel.SetActive(true);
+        }
+        else { gameplayUIPanel.SetActive(false); }
+
+        if (state == GameStateManager.GameState.GameOver)
+        {
+            gameOverUIPanel.SetActive(true);
+        }
+        else { gameOverUIPanel.SetActive(false); }
     }
 
 

@@ -14,4 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   magicCircleData:
   - {fileID: 11400000, guid: 971ad54444956194d97bf63842623c19, type: 2}
+  - {fileID: 11400000, guid: 1fcf297aba9ce0f4584d15acc1e88793, type: 2}
+  - {fileID: 11400000, guid: 436cf187fdd0f0347a94eb0e730a67e6, type: 2}
+  - {fileID: 11400000, guid: 4ee1203fb7de6fe47b5a10db453d1f9f, type: 2}
+  - {fileID: 11400000, guid: 6f2ff1069dd454d4bb72b848a618944a, type: 2}
+  - {fileID: 11400000, guid: a411820282b0eaa4f9d2dfa2a906e6e9, type: 2}
+  - {fileID: 11400000, guid: df21d205aa9dab940834a57672fbce48, type: 2}
+  - {fileID: 11400000, guid: 2cb8160b502329d409707c0c5ad440cf, type: 2}
   map: {fileID: 1792662918503940678, guid: 99c718860e4d1b447af3014040d51fca, type: 3}

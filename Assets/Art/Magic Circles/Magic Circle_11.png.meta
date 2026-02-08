@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 25532948592c4b94285a01b700cb78c6
+guid: c31b4719fa687cf4ea945f660bcbde06
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -103,10 +103,10 @@ TextureImporter:
       name: Magic Circle_11_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 2
-        width: 1075
-        height: 1075
+        x: 29
+        y: 18
+        width: 1027
+        height: 1040
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7ccb8e72ea025944f9ff783d815da454
+guid: 10b32705b19d06c4fb4244f4183c98f4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6130960106625189741
-    second: Magic Circle_1_0
+      213: 825883789090166561
+    second: Magic Circle Hard Box_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 1080
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Magic Circle_1_0
+      name: Magic Circle Hard Box_0
       rect:
         serializedVersion: 2
-        x: 29
-        y: 18
-        width: 1027
-        height: 1040
+        x: 0
+        y: 0
+        width: 1080
+        height: 1350
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 398b38824447aeaa0800000000000000
-      internalID: -6130960106625189741
+      spriteID: 12719723ee0267b00800000000000000
+      internalID: 825883789090166561
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Magic Circle_1_0: -6130960106625189741
+      Magic Circle Hard Box_0: 825883789090166561
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
